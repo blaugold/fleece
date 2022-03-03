@@ -1037,6 +1037,8 @@ public:
         CHECK(ParseDouble(floatBuf, recovered));
         CHECK(FloatEquals(float(recovered), 2.71828f));
 
+        // Emscripten does not come with locales for different languages.
+#ifndef __EMSCRIPTEN__
 #ifdef _MSC_VER
         setlocale(LC_ALL, "fr-FR");
 #else
@@ -1064,6 +1066,7 @@ public:
         CHECK(FloatEquals(recovered_f, 2.71828f));
 
         setlocale(LC_ALL, "C");
+#endif
     }
 
 
